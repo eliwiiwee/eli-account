@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>บัญชี Eli's World</title>
+<link rel="icon" href="assets/app_icon_192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Noto+Sans+Thai:wght@400;600;700&display=swap">
+<style>
+/* the page the e-mails link to: set a new password / e-mail confirmed / link expired (brand: indigo, cream, gold) */
+:root{--wi:#2A3B9C;--wi2:#3448B8;--cream:#F4EFE6;--sand:#E3D9CB;--ink:#292728;--mut:#77716C;--bad:#C42B37;--good:#1F8A4C;color-scheme:light}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--cream);color:var(--ink);font:400 16px/1.6 "Noto Sans Thai",system-ui,sans-serif}
+main{min-height:100vh;display:grid;place-items:center;padding:24px 16px;background:radial-gradient(900px 420px at 50% -8%,#fff 0,var(--cream) 62%)}
+.card{width:100%;max-width:400px;padding:28px 24px 26px;border-radius:26px;background:#fff;box-shadow:0 1px 2px rgba(41,39,40,.05),0 10px 30px rgba(41,39,40,.08);text-align:center}
+.brand{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:6px;color:var(--wi);font:700 17px "Comfortaa",sans-serif}
+.logo{width:22px;height:25px;background:var(--wi);-webkit-mask:url(assets/logo_mark.png) center/contain no-repeat;mask:url(assets/logo_mark.png) center/contain no-repeat}
+.eli{display:block;width:150px;height:140px;margin:6px auto 4px;object-fit:contain;animation:bob 2.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+h1{margin:4px 0 6px;font-size:22px;font-weight:700}
+p{margin:0 0 18px;color:var(--mut)}
+label{display:block;margin-bottom:12px;text-align:left}
+label span{display:block;margin-bottom:6px;font-size:14px;font-weight:600}
+input{width:100%;height:48px;padding:0 14px;border:1.5px solid var(--sand);border-radius:14px;font:inherit;outline:none;background:#fff}
+input:focus{border-color:var(--wi);box-shadow:0 0 0 3px #DCE1F6}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;height:50px;margin-top:6px;border:0;border-radius:25px;background:var(--wi);color:#fff;font:700 16px "Noto Sans Thai",sans-serif;cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--wi2)}.btn:disabled{opacity:.6;cursor:default}
+.err{min-height:22px;margin:10px 0 0;color:var(--bad);font-size:14px}
+.hint{margin-top:16px;font-size:13px;color:var(--mut)}
+.ok{display:inline-grid;place-items:center;width:28px;height:28px;margin-right:4px;border-radius:50%;background:#E5F4EA;color:var(--good);font-weight:700;vertical-align:-6px}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){.eli{animation:none}}
+</style>
+</head>
+<body>
+<main>
+  <div class="card">
+    <div class="brand"><i class="logo"></i>eli's world</div>
+    <section id="vWait"><img class="eli" src="assets/eli_happy.webp" alt=""><p>กำลังตรวจลิงก์…</p></section>
+
+    <form id="vReset" hidden autocomplete="on">
+      <img class="eli" src="assets/eli_happy.webp" alt="">
+      <h1>ตั้งรหัสผ่านใหม่</h1>
+      <p id="who">สำหรับบัญชีของคุณ</p>
+      <input type="email" name="username" autocomplete="username" hidden>
+      <label><span>รหัสผ่านใหม่</span><input name="p1" type="password" minlength="6" autocomplete="new-password" required placeholder="อย่างน้อย 6 ตัว"></label>
+      <label><span>พิมพ์อีกครั้ง</span><input name="p2" type="password" minlength="6" autocomplete="new-password" required></label>
+      <button class="btn" type="submit">บันทึกรหัสผ่านใหม่</button>
+      <p class="err" id="err" role="alert"></p>
+    </form>
+
+    <section id="vDone" hidden><img class="eli" src="assets/eli_happy.webp" alt=""><h1 id="doneT"></h1><p id="doneP"></p></section>
+    <section id="vBad" hidden><img class="eli" src="assets/eli_sick.webp" alt=""><h1>ลิงก์นี้ใช้ไม่ได้แล้ว</h1><p id="badP">ลิงก์ในอีเมลใช้ได้ครั้งเดียวภายใน 1 ชั่วโมง ลิงก์นี้หมดอายุหรือถูกใช้ไปแล้ว ขอลิงก์ใหม่ได้ในแอป Eli's World ที่ปุ่ม "ลืมรหัสผ่าน?"</p></section>
+    <section id="vNone" hidden><img class="eli" src="assets/eli_happy.webp" alt=""><h1>บัญชี Eli's World</h1><p>หน้านี้ใช้คู่กับลิงก์ในอีเมลจาก Eli's World (ตั้งรหัสผ่านใหม่ และยืนยันอีเมล) เปิดลิงก์จากอีเมลของคุณอีกครั้งนะ</p></section>
+    <p class="hint">มีปัญหา ติดต่อ LINE @eliofficial</p>
+  </div>
+</main>
+<script src="vendor/supabase-2.117.3.js"></script>
+<script src="config.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const show = id => ['vWait', 'vReset', 'vDone', 'vBad', 'vNone'].forEach(v => $('#' + v).hidden = v !== id);
+const done = (t, p) => { $('#doneT').innerHTML = `<span class="ok">✓</span>${t}`; $('#doneP').textContent = p; show('vDone'); };
+// what the e-mail link carries (read before the client tidies the address bar)
+const H = new URLSearchParams(location.hash.slice(1)), Q = new URLSearchParams(location.search);
+const type = H.get('type') || Q.get('type'), error = H.get('error_code') || H.get('error') || Q.get('error');
+(async () => {
+  const C = window.ELI_ACCOUNT || {};
+  if (error) return show('vBad');   // expired or already used (the server reports both as otp_expired)
+  if (!H.get('access_token') && !Q.get('code')) return show('vNone');
+  const sb = supabase.createClient(C.url, C.key, { auth: { persistSession: false, detectSessionInUrl: true, flowType: 'implicit' } });
+  const { data } = await sb.auth.getSession();
+  history.replaceState(null, '', location.pathname);   // keep the token out of the address bar / history
+  if (!data.session) return show('vBad');
+  if (type === 'recovery') {
+    $('#who').textContent = `สำหรับ ${data.session.user.email}`; $('[name=username]').value = data.session.user.email;
+    show('vReset'); $('[name=p1]').focus();
+    $('#vReset').onsubmit = async e => {
+      e.preventDefault(); const f = e.target, b = $('button', f), err = $('#err');
+      if (f.p1.value.length < 6) return err.textContent = 'รหัสผ่านอย่างน้อย 6 ตัวนะ';
+      if (f.p1.value !== f.p2.value) return err.textContent = 'รหัสผ่านสองช่องไม่ตรงกัน';
+      b.disabled = true; b.textContent = 'กำลังบันทึก…'; err.textContent = '';
+      const { error } = await sb.auth.updateUser({ password: f.p1.value });
+      if (error) { b.disabled = false; b.textContent = 'บันทึกรหัสผ่านใหม่'; err.textContent = /same|different/i.test(error.message) ? 'รหัสใหม่ต้องไม่ซ้ำกับรหัสเดิม' : /weak|short|least/i.test(error.message) ? 'รหัสผ่านง่ายเกินไป ลองรหัสที่ยาวขึ้น' : 'บันทึกไม่สำเร็จ ลองใหม่อีกครั้ง'; return; }
+      await sb.auth.signOut({ scope: 'local' });
+      done('ตั้งรหัสผ่านใหม่แล้ว', 'กลับไปที่แอป Eli\'s World แล้วเข้าสู่ระบบด้วยรหัสผ่านใหม่ได้เลย');
+    };
+  } else {
+    await sb.auth.signOut({ scope: 'local' });
+    done(type === 'email_change' ? 'เปลี่ยนอีเมลแล้ว' : 'ยืนยันอีเมลแล้ว', 'กลับไปที่แอป Eli\'s World แล้วเข้าสู่ระบบได้เลย น้อง eli รออยู่นะ');
+  }
+})().catch(() => show('vBad'));
+</script>
+</body>
+</html>
