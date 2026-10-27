@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ลบบัญชี Eli's World</title>
+<link rel="icon" href="assets/app_icon_192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Noto+Sans+Thai:wght@400;600;700&display=swap">
+<style>
+/* the web way to delete an Eli's World account (Google Play asks for one beside the in-app button); same look as index.html */
+:root{--wi:#2A3B9C;--wi2:#3448B8;--cream:#F4EFE6;--sand:#E3D9CB;--ink:#292728;--mut:#77716C;--bad:#C42B37;--good:#1F8A4C;color-scheme:light}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--cream);color:var(--ink);font:400 16px/1.6 "Noto Sans Thai",system-ui,sans-serif}
+main{min-height:100vh;display:grid;place-items:center;padding:24px 16px;background:radial-gradient(900px 420px at 50% -8%,#fff 0,var(--cream) 62%)}
+.card{width:100%;max-width:440px;padding:28px 24px 26px;border-radius:26px;background:#fff;box-shadow:0 1px 2px rgba(41,39,40,.05),0 10px 30px rgba(41,39,40,.08)}
+.brand{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:6px;color:var(--wi);font:700 17px "Comfortaa",sans-serif}
+.logo{width:22px;height:25px;background:var(--wi);-webkit-mask:url(assets/logo_mark.png) center/contain no-repeat;mask:url(assets/logo_mark.png) center/contain no-repeat}
+h1{margin:4px 0 10px;font-size:22px;font-weight:700;text-align:center}
+p,li{color:var(--mut);font-size:15px}
+p{margin:0 0 12px}
+ul{margin:0 0 14px;padding-left:20px}
+.box{margin:0 0 16px;padding:12px 14px;border-radius:14px;background:var(--cream);font-size:14px}
+.box b{color:var(--ink)}
+label{display:block;margin-bottom:12px}
+label span{display:block;margin-bottom:6px;font-size:14px;font-weight:600}
+input{width:100%;height:48px;padding:0 14px;border:1.5px solid var(--sand);border-radius:14px;font:inherit;outline:none;background:#fff}
+input:focus{border-color:var(--wi);box-shadow:0 0 0 3px #DCE1F6}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;height:50px;margin-top:6px;border:0;border-radius:25px;background:var(--wi);color:#fff;font:700 16px "Noto Sans Thai",sans-serif;cursor:pointer}
+.btn:hover{background:var(--wi2)}.btn:disabled{opacity:.6;cursor:default}
+.btn.red{background:#E8453C}.btn.red:hover{background:#D23A31}
+.link{display:block;margin:12px auto 0;border:0;background:none;color:var(--wi);font:600 14px "Noto Sans Thai",sans-serif;cursor:pointer}
+.err{min-height:22px;margin:10px 0 0;color:var(--bad);font-size:14px;text-align:center}
+.ok{display:inline-grid;place-items:center;width:28px;height:28px;margin-right:4px;border-radius:50%;background:#E5F4EA;color:var(--good);font-weight:700;vertical-align:-6px}
+.hint{margin-top:16px;font-size:13px;text-align:center}
+.center{text-align:center}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+  <div class="card">
+    <div class="brand"><i class="logo"></i>eli's world</div>
+    <h1>ลบบัญชี Eli's World</h1>
+
+    <section id="vInfo">
+      <p>เมื่อลบบัญชี ข้อมูลเหล่านี้จะถูกลบทันทีและกู้คืนไม่ได้</p>
+      <ul>
+        <li>บัญชีเข้าสู่ระบบ, Eli Citizen ID และโปรไฟล์</li>
+        <li>Life Power เหรียญ Streak และสรุปก้าว/การนอนรายวัน</li>
+        <li>ประวัติการวิ่งและเส้นทาง เพื่อนและหัวใจที่ส่ง</li>
+      </ul>
+      <div class="box">คำสั่งแลกของรางวัลที่ยังจัดส่งไม่เสร็จ: เก็บเฉพาะรายการของและชื่อ เบอร์โทร ที่อยู่ (ไม่ผูกกับบัญชีแล้ว) ไว้จนส่งของถึงคุณ</div>
+      <div class="box"><b>ลบในแอปก็ได้:</b> เปิด Eli's World → แตะรูปโปรไฟล์ → ปุ่ม "ลบบัญชี"</div>
+    </section>
+
+    <form id="vSign" autocomplete="on">
+      <p class="center">หรือเข้าสู่ระบบด้วยบัญชีที่จะลบ</p>
+      <label><span>อีเมล</span><input name="email" type="email" autocomplete="username" required></label>
+      <label><span>รหัสผ่าน</span><input name="pw" type="password" autocomplete="current-password" required></label>
+      <button class="btn" type="submit">เข้าสู่ระบบ</button>
+      <button class="link" type="button" id="forgot">ลืมรหัสผ่าน?</button>
+      <p class="err" id="err1" role="alert"></p>
+    </form>
+
+    <form id="vConfirm" hidden>
+      <p class="center">บัญชี <b id="who"></b><br>พิมพ์ <b>ลบบัญชี</b> เพื่อยืนยัน</p>
+      <label><input name="c" autocomplete="off" placeholder="ลบบัญชี"></label>
+      <button class="btn red" type="submit">ลบบัญชีถาวร</button>
+      <button class="link" type="button" id="cancel">ยกเลิก</button>
+      <p class="err" id="err2" role="alert"></p>
+    </form>
+
+    <section id="vDone" hidden class="center"><h1><span class="ok">✓</span>ลบบัญชีแล้ว</h1><p>ขอบคุณที่มาเดินด้วยกันนะ น้อง eli จะคิดถึง 💙</p></section>
+
+    <p class="hint">มีปัญหา หรือเข้าสู่ระบบไม่ได้ ติดต่อ LINE @eliofficial หรือ eli.official.th.66@gmail.com แล้วเราจะลบให้ภายใน 7 วัน</p>
+  </div>
+</main>
+<script src="vendor/supabase-2.117.3.js"></script>
+<script src="config.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const C = window.ELI_ACCOUNT || {};
+const sb = supabase.createClient(C.url, C.key, { auth: { persistSession: false, autoRefreshToken: false } });
+const busy = (b, on, t) => { b.disabled = on; if (t) b.textContent = t; };
+$('#vSign').onsubmit = async e => {
+  e.preventDefault(); const f = e.target, b = $('.btn', f), err = $('#err1');
+  busy(b, true, 'กำลังเข้าสู่ระบบ…'); err.textContent = '';
+  const { data, error } = await sb.auth.signInWithPassword({ email: f.email.value.trim(), password: f.pw.value });
+  busy(b, false, 'เข้าสู่ระบบ');
+  if (error) return err.textContent = /invalid/i.test(error.message) ? 'อีเมลหรือรหัสผ่านไม่ถูกต้อง' : /banned/i.test(error.message) ? 'บัญชีนี้ถูกระงับ ติดต่อทีม eli เพื่อขอลบ' : 'เข้าสู่ระบบไม่สำเร็จ ลองใหม่อีกครั้ง';
+  f.pw.value = ''; $('#who').textContent = data.user.email;
+  $('#vSign').hidden = true; $('#vConfirm').hidden = false; $('[name=c]').focus();
+};
+$('#cancel').onclick = async () => { await sb.auth.signOut({ scope: 'local' }); $('#vConfirm').hidden = true; $('#vSign').hidden = false; };
+$('#vConfirm').onsubmit = async e => {
+  e.preventDefault(); const f = e.target, b = $('.btn', f), err = $('#err2');
+  if (f.c.value.trim() !== 'ลบบัญชี') return err.textContent = 'พิมพ์ "ลบบัญชี" ให้ตรงก่อนนะ';
+  busy(b, true, 'กำลังลบ…'); err.textContent = '';
+  const { error } = await sb.rpc('delete_me');
+  if (error) { busy(b, false, 'ลบบัญชีถาวร'); return err.textContent = /last_owner/.test(error.message) ? 'บัญชีนี้เป็นเจ้าของหลังบ้านคนสุดท้าย — โอนสิทธิ์เจ้าของให้คนอื่นก่อนลบ' : 'ลบไม่สำเร็จ ลองใหม่อีกครั้ง หรือติดต่อทีม eli'; }
+  await sb.auth.signOut({ scope: 'local' });
+  ['vInfo', 'vConfirm'].forEach(id => $('#' + id).hidden = true); $('#vDone').hidden = false;
+};
+$('#forgot').onclick = async () => {
+  const email = $('[name=email]').value.trim(), err = $('#err1');
+  if (!/^\S+@\S+\.\S+$/.test(email)) { err.textContent = 'กรอกอีเมลก่อน แล้วกด "ลืมรหัสผ่าน?" อีกครั้ง'; return $('[name=email]').focus(); }
+  const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: new URL('./', location.href).href });
+  err.textContent = error ? 'ส่งลิงก์ไม่สำเร็จ ลองใหม่อีกครั้ง' : `ส่งลิงก์ตั้งรหัสผ่านใหม่ไปที่ ${email} แล้ว`;
+};
+</script>
+</body>
+</html>
